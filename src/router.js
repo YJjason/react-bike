@@ -11,6 +11,14 @@ import Admin from './Admin';
 import Home from './pages/home';
 
 import Buttons from './pages/ui/buttons';
+import Modals from './pages/ui/modals';
+import Loading from './pages/ui/loading';
+import Notification from './pages/ui/notification';
+import Message from './pages/ui/message';
+import Tabls from './pages/ui/tabs';
+import Gallery from "./pages/ui/gallery";
+import Carousels from "./pages/ui/carousel";
+
 import Nomatch from "./pages/nomatch";
 
 class Router extends Component {
@@ -25,6 +33,13 @@ class Router extends Component {
                            <Switch>
                                <Route path='/admin/home' component={Home}></Route>
                                <Route path='/admin/ui/buttons' component={Buttons}></Route>
+                               <Route path='/admin/ui/modals' component={Modals}></Route>
+                               <Route path='/admin/ui/loadings' component={Loading}></Route>
+                               <Route path='/admin/ui/notification' component={Notification}></Route>
+                               <Route path='/admin/ui/messages' component={Message}></Route>
+                               <Route path='/admin/ui/tabs' component={Tabls}></Route>
+                               <Route path='/admin/ui/gallery' component={Gallery}></Route>
+                               <Route path='/admin/ui/carousel' component={Carousels}></Route>
                                <Route component={Nomatch}></Route>
                            </Switch>
                         </Admin>

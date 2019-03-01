@@ -36,7 +36,7 @@ class Buttons extends Component {
                     <Button type="danger">Danger</Button>
                     <Button disabled>disabled</Button>
                 </Card>
-                <Card title='图形按钮'>
+                <Card title='图形按钮' className='card-wrap'>
                     <Button icon="plus">创建</Button>
                     <Button icon="edit">编辑</Button>
                     <Button icon="delete">删除</Button>
@@ -44,7 +44,7 @@ class Buttons extends Component {
                     <Button icon="search">搜索</Button>
                     <Button icon="download">下载</Button>
                 </Card>
-                <Card title='loading按钮'>
+                <Card title='loading按钮' className='card-wrap'>
                     <Button type="primary" loading>
                         确认
                     </Button>
@@ -57,7 +57,7 @@ class Buttons extends Component {
                         Click me!
                     </Button>
                 </Card>
-                <Card title='按钮组'>
+                <Card title='按钮组' className='card-wrap'>
                     <Button.Group>
                         <Button type="primary">
                             <Icon type="left"/>Go back
@@ -67,7 +67,7 @@ class Buttons extends Component {
                         </Button>
                     </Button.Group>
                 </Card>
-                <Card title='按钮尺寸'>
+                <Card title='按钮尺寸' className='card-wrap'>
                     <Radio.Group value={this.state.size} onChange={this.handleChange}>
                         <Radio value='small'>L</Radio>
                         <Radio value='default'>M</Radio>
