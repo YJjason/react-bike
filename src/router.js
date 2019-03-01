@@ -20,6 +20,7 @@ import Gallery from "./pages/ui/gallery";
 import Carousels from "./pages/ui/carousel";
 
 import Nomatch from "./pages/nomatch";
+import FormLogin from "./pages/form/login";
 
 class Router extends Component {
 
@@ -40,6 +41,7 @@ class Router extends Component {
                                <Route path='/admin/ui/tabs' component={Tabls}></Route>
                                <Route path='/admin/ui/gallery' component={Gallery}></Route>
                                <Route path='/admin/ui/carousel' component={Carousels}></Route>
+                               <Route path='/admin/form/login' component={FormLogin}></Route>
                                <Route component={Nomatch}></Route>
                            </Switch>
                         </Admin>
