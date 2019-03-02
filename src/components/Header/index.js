@@ -15,20 +15,23 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            timer:null,
             usrename: '',
             sysTime: ''
         }
     }
-
     componentWillMount() {
         this.setState({
             userName: 'jason'
         });
-        setInterval(() => {
+        this.timer=setInterval(() => {
             let sysTime = Util.formateDate(new Date().getTime());
             this.setState({sysTime})
         }, 1000);
         this.getWeatherAPIData();
+    }
+    componentWillUnmount() {
+        clearInterval(this.timer)
     }
 
     getWeatherAPIData() {
@@ -52,7 +55,7 @@ class Header extends Component {
                 <Row className='header-top'>
                     <Col span={24}>
                         <span>欢迎，{this.state.userName}</span>
-                        <a href="#">退出</a>
+                        <a href="javascript:void (0)">退出</a>
                     </Col>
                 </Row>
                 <Row className='breadcrumb'>

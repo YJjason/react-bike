@@ -16,12 +16,6 @@ const SubMenu = Menu.SubMenu;
 
 
 class NavLeft extends Component {
-
-    constructor(props) {
-        super(props);
-
-    }
-
     componentWillMount() {
         const menuTreeNode = this.renderMenu(MenuConfig);
         this.setState({menuTreeNode});

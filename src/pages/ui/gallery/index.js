@@ -32,7 +32,7 @@ class Gallery extends Component {
                 return list.map((item, index) => {
                         return <Card key={index}
                                      style={{marginBottom: 10}}
-                                     cover={<img src={'/gallery/' + item} onClick={() => this.handleShowPic(item)} />}
+                                     cover={<img src={'/gallery/' + item} onClick={() => this.handleShowPic(item)} alt={item} />}
                         >
                             <Meta
                                 title='照片'

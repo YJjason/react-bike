@@ -162,7 +162,7 @@ class FormLogin extends Component {
                                     <Checkbox>记住密码</Checkbox>
                                 )
                             }
-                            <a href="#" style={{float:'right'}}>忘记密码</a>
+                            <a href="javascript:void (0)" style={{float:'right'}}>忘记密码</a>
                         </FormItem>
                         <FormItem>
                             <Button type='primary' onClick={this.handleSubmitBtn}>登录</Button>
