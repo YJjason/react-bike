@@ -1,0 +1,47 @@
+.header {
+  background: #fff;
+}
+.header .header-top {
+  height: 60px;
+  line-height: 60px;
+  padding: 0 20px;
+  text-align: right;
+}
+.header .header-top a {
+  margin-left: 20px;
+}
+.header .breadcrumb {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  border-top: 1px solid #f9c700;
+  font-size: 12px;
+}
+.header .breadcrumb .breadcrumb-title {
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+}
+.header .breadcrumb .breadcrumb-title:after {
+  position: absolute;
+  content: '';
+  left: 125px;
+  top: 39px;
+  border: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.header .breadcrumb .weather {
+  text-align: right;
+}
+.header .breadcrumb .weather .date {
+  margin-right: 10px;
+}
+.header .breadcrumb .weather .weather-img img {
+  height: 25px;
+}
+.header .breadcrumb .weather .weather-detail {
+  margin-left: 5px;
+}
+/*# sourceMappingURL=index.css.map */

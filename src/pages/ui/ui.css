@@ -1,0 +1,23 @@
+.card-wrap {
+  margin: 10px 0;
+}
+button {
+  margin-right: 10px;
+}
+.spin-wrap span {
+  margin-right: 20px;
+}
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+.pic-carousel img {
+  width: 100%;
+}
+/*# sourceMappingURL=ui.css.map */
