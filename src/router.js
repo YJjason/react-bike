@@ -22,6 +22,8 @@ import Carousels from "./pages/ui/carousel";
 import Nomatch from "./pages/nomatch";
 import FormLogin from "./pages/form/login";
 import Register from "./pages/form/register";
+//表格
+import BasicTable from "./pages/table/basicTable";
 
 class Router extends Component {
 
@@ -44,6 +46,7 @@ class Router extends Component {
                                <Route path='/admin/ui/carousel' component={Carousels}></Route>
                                <Route path='/admin/form/login' component={FormLogin}></Route>
                                <Route path='/admin/form/reg' component={Register}></Route>
+                               <Route path='/admin/table/basic' component={BasicTable}></Route>
                                <Route component={Nomatch}></Route>
                            </Switch>
                         </Admin>

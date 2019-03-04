@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 import React, {Component} from 'react';
-import {Form, Icon, Input, Button, Card, message,Checkbox} from "antd";
+import {Form, Icon, Input, Button, Card, message, Checkbox} from "antd";
 
 const FormItem = Form.Item
 
@@ -126,8 +126,8 @@ class FormLogin extends Component {
                                             max: 10,
                                             message: '长度不在范围内'
                                         }, {
-                                            pattern:/^\w+$/g,
-                                            message:'字符和数字'
+                                            pattern: /^\w+$/g,
+                                            message: '字符和数字'
                                         }
                                     ]
                                 })(
@@ -155,14 +155,14 @@ class FormLogin extends Component {
                         <FormItem>
                             {
                                 getFieldDecorator('remeber', {
-                                    valuePropName:'checked',
+                                    valuePropName: 'checked',
                                     initialValue: true,
                                     rules: []
                                 })(
                                     <Checkbox>记住密码</Checkbox>
                                 )
                             }
-                            <a href="javascript:void (0)" style={{float:'right'}}>忘记密码</a>
+                            <a href="javascript:void (0)" style={{float: 'right'}}>忘记密码</a>
                         </FormItem>
                         <FormItem>
                             <Button type='primary' onClick={this.handleSubmitBtn}>登录</Button>
