@@ -20,6 +20,9 @@ class BasicTable extends Component {
         dataSource3: [],
         selectedRowKeys: []
     }
+    params={
+        page:1
+    }
 
     componentDidMount() {
         this.request();
@@ -69,6 +72,7 @@ class BasicTable extends Component {
     /*动态获取mock 数据*/
 
     request = () => {
+        let _this =this;
         /* let baseUrl = 'https://www.easy-mock.com/mock/5c7d3aaa2d0e9237c71cca2e/mockapi'*/
         /*封裝請求*/
         /*    axios.get(baseUrl + '/table/list').then((res) => {
@@ -83,7 +87,7 @@ class BasicTable extends Component {
             url: '/table/list',
             data: {
                 params: {
-                    page: 1
+                    page: this.params.page
                 }
             }
         }).then((res) => {
@@ -95,7 +99,8 @@ class BasicTable extends Component {
                     dataSource2: res.result.list,
                     dataSource3: res.result.list,
                     pagination: Utils.pagination(res, (current) => {
-
+                        _this.params.page=current;
+                        this.request()
                     })
                 })
             }

@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 import React, {Component} from 'react';
-import {HashRouter, Route, Switch} from "react-router-dom";
+import {HashRouter,BrowserRouter, Route, Switch} from "react-router-dom";
 import App from './App';
 import Login from './pages/login';
 import Admin from './Admin';
@@ -24,12 +24,14 @@ import FormLogin from "./pages/form/login";
 import Register from "./pages/form/register";
 //表格
 import BasicTable from "./pages/table/basicTable";
+import HighTable from "./pages/table/highTable";
+
 
 class Router extends Component {
 
     render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <App>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/admin' render={()=>
@@ -47,12 +49,13 @@ class Router extends Component {
                                <Route path='/admin/form/login' component={FormLogin}></Route>
                                <Route path='/admin/form/reg' component={Register}></Route>
                                <Route path='/admin/table/basic' component={BasicTable}></Route>
+                               <Route path='/admin/table/high' component={HighTable}></Route>
                                <Route component={Nomatch}></Route>
                            </Switch>
                         </Admin>
                     }/>
                 </App>
-            </HashRouter>
+            </BrowserRouter>
         );
     }
 
