@@ -7,15 +7,17 @@
  */
 
 import React, {Component} from 'react';
-import {Card, Table} from 'antd';
+import {Card, Table, Modal, Button, message} from 'antd';
 // import axios from 'axios';
 //使用封装的请求
 import axios from './../../../axios'
+import Utils from './../../../utils/utils.js'
 
 class BasicTable extends Component {
 
     state = {
         dataSource2: [],
+        dataSource3: [],
         selectedRowKeys: []
     }
 
@@ -86,16 +88,24 @@ class BasicTable extends Component {
             }
         }).then((res) => {
             if (res.code == 0) {
-                res.result.map((item, index) => {
+                res.result.list.map((item, index) => {
                     item.key = index
                 })
                 this.setState({
-                    dataSource2: res.result
+                    dataSource2: res.result.list,
+                    dataSource3: res.result.list,
+                    pagination: Utils.pagination(res, (current) => {
+
+                    })
                 })
             }
         })
     }
-    selectRow = (record) => {
+    selectRow = (record, index) => {
+        Modal.info({
+            title: '选中信息',
+            content: `用户名：${record.userName},地址：${record.address}`
+        })
         const selectedRowKeys = [...this.state.selectedRowKeys];
         if (selectedRowKeys.indexOf(record.key) >= 0) {
             selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
@@ -104,8 +114,30 @@ class BasicTable extends Component {
         }
         this.setState({selectedRowKeys});
     }
-    onSelectedRowKeysChange = (selectedRowKeys) => {
-        this.setState({selectedRowKeys})
+    onSelectedRowKeysChange = (selectedRowKeys, selectedRows) => {
+        // console.log(selectedRowKeys, selectedRows)
+        this.setState({selectedRowKeys, selectedRows})
+    }
+
+    handleDelete = () => {
+        let rows = this.state.selectedRows;
+        let ids = [];
+        rows.map((item) => {
+            ids.push(item)
+        })
+        Modal.confirm({
+            title: '删除提示',
+            content: `确定要删除选中数据`,
+            onOk: () => {
+                message.success("删除成功");
+                this.request();
+                /*删除选中，刷新数据*/
+                this.setState({
+                    selectedRowKeys: [],
+                    selectedRows: null
+                })
+            }
+        })
     }
 
     render() {
@@ -170,7 +202,7 @@ class BasicTable extends Component {
         ];
         const {selectedRowKeys} = this.state;
         const rowSelection = {
-            // type:'checkbox',//default
+            // type:'radio',//default  checkbox 多选  radio  单选
             selectedRowKeys,
             onChange: this.onSelectedRowKeysChange,
         };
@@ -187,15 +219,25 @@ class BasicTable extends Component {
                            dataSource={this.state.dataSource2}
                     />
                 </Card>
-                <Card title='mock 单选表格'>
-                    <Table columns={columns}
+                <Card title='mock 单选表格' style={{marginBottom: 10}}>
+                    <Button onClick={this.handleDelete} style={{marginBottom: 5}}>删除</Button>
+                    <Table bordered
+                           pagination={false}
+                           columns={columns}
                            rowSelection={rowSelection}
                            dataSource={this.state.dataSource2}
-                           onRow={(record) => ({
+                           onRow={(record, index) => ({
                                onClick: () => {
-                                   this.selectRow(record)
+                                   this.selectRow(record, index)
                                }
                            })}
+                    />
+                </Card>
+                <Card title='mock 分页表格'>
+                    <Table bordered
+                           columns={columns}
+                           dataSource={this.state.dataSource3}
+                           pagination={this.state.pagination}
                     />
                 </Card>
             </div>
