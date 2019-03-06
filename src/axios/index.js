@@ -39,9 +39,9 @@ export default class Axios {
                 params: (options.data && options.data.params) || ''
 
             }).then((response) => {
-                if (response.status == '200') {
+                if (response.status === 200) {
                     let res = response.data;
-                    if (res.code == '0') {
+                    if (res.code === 0) {
                         loading.style.display = 'none'
                         resolve(res)
                     } else {

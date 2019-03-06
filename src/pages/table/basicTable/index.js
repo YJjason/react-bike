@@ -16,7 +16,7 @@ class BasicTable extends Component {
 
     state = {
         dataSource2: [],
-        selectedRowKeys:[]
+        selectedRowKeys: []
     }
 
     componentDidMount() {
@@ -95,13 +95,17 @@ class BasicTable extends Component {
             }
         })
     }
-
-    onRowClick = (record, index) => {
-        let selectKey = [index];
-        this.setState({
-            selectedRowKey: selectKey,
-            selectedItem:record
-        })
+    selectRow = (record) => {
+        const selectedRowKeys = [...this.state.selectedRowKeys];
+        if (selectedRowKeys.indexOf(record.key) >= 0) {
+            selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1);
+        } else {
+            selectedRowKeys.push(record.key)
+        }
+        this.setState({selectedRowKeys});
+    }
+    onSelectedRowKeysChange = (selectedRowKeys) => {
+        this.setState({selectedRowKeys})
     }
 
     render() {
@@ -164,15 +168,11 @@ class BasicTable extends Component {
                 key: 'time'
             }
         ];
-      /*  const rowSelection = {
-            type: 'radio',
-            selectedRowKey
-        };
-*/
-        const { selectedRowKeys } = this.state;
+        const {selectedRowKeys} = this.state;
         const rowSelection = {
-            type:'radio',
+            // type:'checkbox',//default
             selectedRowKeys,
+            onChange: this.onSelectedRowKeysChange,
         };
 
         return (
@@ -189,14 +189,13 @@ class BasicTable extends Component {
                 </Card>
                 <Card title='mock 单选表格'>
                     <Table columns={columns}
-                           bordered
                            rowSelection={rowSelection}
-                           onRow={(record, index) => {
-                               return {
-                                   onClick: this.onRowClick(record, index),       // 点击行
-                               };
-                           }}
                            dataSource={this.state.dataSource2}
+                           onRow={(record) => ({
+                               onClick: () => {
+                                   this.selectRow(record)
+                               }
+                           })}
                     />
                 </Card>
             </div>
