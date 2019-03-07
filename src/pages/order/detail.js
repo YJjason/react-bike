@@ -27,10 +27,56 @@ class Order extends Component {
                 }
             }
         }).then((res) => {
-            this.setState({
-                orderInfo: res.result
-            })
+            if (res.code == 0) {
+                this.setState({
+                    orderInfo: res.result
+                })
+                this.renderMap(res.result)
+            }
+
         })
+    }
+    /*初始化地图*/
+    renderMap = (result) => {
+        // 创建地图实例
+        this.map = new window.BMap.Map("orderDetailMap");
+        // 创建点坐标
+        let point = new window.BMap.Point(116.404, 39.915);
+        // 初始化地图，设置中心点坐标和地图级别
+        this.map.centerAndZoom(point, 15) // 15 缩放等级
+        this.addMapControl()
+        /*绘制路线图*/
+        this.drawBikeRoute(result.position_list)
+    }
+    /*添加地图控件*/
+    addMapControl = () => {
+        let map = this.map;
+        /*anchor 控件位置*/
+        map.addControl(new window.BMap.ScaleControl({anchor: window.BMAP_ANCHOR_TOP_LEFT}));
+        map.addControl(new window.BMap.NavigationControl({anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
+    }
+    /*绘制行驶路线*/
+    drawBikeRoute = (positionList) => {
+        let map = this.map;
+        let startPoint = '';
+        let endPoint = '';
+        if (positionList.len > 0) {
+            let arr = positionList[0]
+            /*初始起始坐标点及图表*/
+            new window.BMap.Point(arr.lon, arr.lat);
+            let startIcon = new window.BMap.Icon(
+                '/assets/start_point.png',
+                new window.BMap.Size(36, 42), {
+                    imgSize: new window.BMap.Size(36, 42),
+                    anchor: new window.BMap.Size(36, 42)
+                })
+            let startMarker = new window.BMap.Marker(startPoint, {
+                icon: startIcon
+            })
+            map.addOverlay(startMarker)
+        }
+
+
     }
 
     render() {
@@ -38,7 +84,7 @@ class Order extends Component {
         return (
             <div>
                 <Card>
-                    <div id='orderDetailMap'>
+                    <div id='orderDetailMap' className='order-map'>
                     </div>
                     <div className='detail-items '>
                         <div className="item-title">基础信息</div>
@@ -78,7 +124,7 @@ class Order extends Component {
                             </li>
                             <li className="clearfix">
                                 <div className="detail-form-left">行驶里程:</div>
-                                <div className="detail-form-content">{info.distance/1000} 公里</div>
+                                <div className="detail-form-content">{info.distance / 1000} 公里</div>
                             </li>
                         </ul>
                     </div>
