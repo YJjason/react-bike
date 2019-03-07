@@ -49,7 +49,6 @@ class HighTable extends Component {
         })
     }
     handleDelete = (text,item) => {
-        console.log(text)
         // let id = item.id;
         Modal.confirm({
             title: '确认',
