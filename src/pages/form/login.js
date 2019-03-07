@@ -176,4 +176,4 @@ class FormLogin extends Component {
 }
 
 export default Form.create({name: 'horizontal_login'})(FormLogin);
-;
+

@@ -25,6 +25,8 @@ import Register from "./pages/form/register";
 //表格
 import BasicTable from "./pages/table/basicTable";
 import HighTable from "./pages/table/highTable";
+/*城市管理*/
+import FilterForm from './pages/city';
 
 
 class Router extends Component {
@@ -50,6 +52,7 @@ class Router extends Component {
                                <Route path='/admin/form/reg' component={Register}></Route>
                                <Route path='/admin/table/basic' component={BasicTable}></Route>
                                <Route path='/admin/table/high' component={HighTable}></Route>
+                               <Route path='/admin/city' component={FilterForm}></Route>
                                <Route component={Nomatch}></Route>
                            </Switch>
                         </Admin>
