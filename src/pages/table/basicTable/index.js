@@ -73,15 +73,6 @@ class BasicTable extends Component {
 
     request = () => {
         let _this =this;
-        /* let baseUrl = 'https://www.easy-mock.com/mock/5c7d3aaa2d0e9237c71cca2e/mockapi'*/
-        /*封裝請求*/
-        /*    axios.get(baseUrl + '/table/list').then((res) => {
-                if (res.status === 200 && res.data.code === 0) {
-                    this.setState({
-                        dataSource2: res.data.result
-                    })
-                }
-            })*/
 
         axios.ajax({
             url: '/table/list',
