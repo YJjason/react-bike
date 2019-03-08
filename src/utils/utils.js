@@ -4,8 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
+import React from 'react';
+import {Select} from "antd";
 
-export default  {
+const Option = Select.Option;
+
+export default {
     //时间转换
     formateDate(time) {
         if (!time) return '';
@@ -27,6 +31,19 @@ export default  {
             },
             showQuickJumper: true
         }
+    },
+
+//
+    getOptionList(data) {
+        console.log(111,data)
+        if (!data) {
+            return []
+        }
+        let options=[];
+        data.map((item) => {
+            options.push(<Option value={item.id} key={item.name}>{item.name}</Option>)
+        })
+        return options
     }
 
 }

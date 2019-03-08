@@ -5,9 +5,11 @@
  */
 
 import React, {Component} from 'react';
-import {Card, Table, Form, DatePicker, Modal, Button,  Select,} from 'antd';
+import {Card, Table, Form, DatePicker, Modal, Button, Select,} from 'antd';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
+//封装组件
+import BaseForm from './../../components/BaseForm'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -20,6 +22,61 @@ class Order extends Component {
     params = {
         page: 1
     }
+    //form 表单封装初始化
+    formList = [
+        {
+            type: 'SELECT',
+            label: '城市',
+            placeholder: '全部',
+            initialValue: '1',
+            width: 100,
+            filter:'city_id',
+            list: [
+                {
+                    id: '0',
+                    name: '全部'
+                },
+                {
+                    id: '1',
+                    name: '北京'
+                },
+                {
+                    id: '2',
+                    name: '天津'
+                },
+                {
+                    id: '3',
+                    name: '上海'
+                }
+            ]
+        },
+        {
+            type:'TIME_SEARCH',
+
+        },
+        {
+            type: 'SELECT',
+            label: '订单状态',
+            placeholder: '全部',
+            initialValue: '1',
+            filter:'order_status',
+            width: 100,
+            list: [
+                {
+                    id: '0',
+                    name: '全部'
+                },
+                {
+                    id: '1',
+                    name: '进行中'
+                },
+                {
+                    id: '2',
+                    name: '结束订单'
+                }
+            ]
+        },
+    ]
 
     componentDidMount() {
         this.requestList()
@@ -62,10 +119,10 @@ class Order extends Component {
     }
     onRowClick = (record, index) => {
         let selectKey = [index];
-        console.log(1,record)
+        console.log(1, record)
         this.setState({
-            selectedRowKeys:selectKey,
-            selectedItem:record
+            selectedRowKeys: selectKey,
+            selectedItem: record
         })
     }
     onSelectChange = (selectedRowKeys, selectedItem) => {
@@ -75,7 +132,10 @@ class Order extends Component {
             selectedItem: record
         })
     }
-
+    handleFilter=(params)=>{
+        this.params=params;
+        this.requestList(params)
+    }
 
     render() {
 
@@ -130,7 +190,8 @@ class Order extends Component {
         return (
             <div>
                 <Card title="城市管理">
-                    <FilterForm></FilterForm>
+                    {/*<FilterForm ></FilterForm>*/}
+                    <BaseForm formList ={this.formList} filterSubmit={this.handleFilter}/>
                 </Card>
                 <Card style={{marginTop: 10}}>
                     <Button onClick={this.openOrderDetail}>订单详情</Button>
@@ -160,7 +221,8 @@ class Order extends Component {
 
 export default Order;
 
-/*子组件1*/
+/*子组件1  提取封装公共组件*/
+/*
 class FilterForm extends React.Component {
     render() {
         const {getFieldDecorator} = this.props.form;
@@ -197,7 +259,7 @@ class FilterForm extends React.Component {
                 </FormItem>
                 <FormItem label="订单状态">
                     {
-                        getFieldDecorator('op_mode')(
+                        getFieldDecorator('order_status')(
                             <Select
                                 style={{width: 80}}
                                 placeholder="全部"
@@ -220,3 +282,4 @@ class FilterForm extends React.Component {
 }
 
 FilterForm = Form.create({})(FilterForm);
+*/
