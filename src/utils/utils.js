@@ -38,11 +38,26 @@ export default {
         if (!data) {
             return []
         }
-        let options=[];
+        let options = [];
         data.map((item) => {
             options.push(<Option value={item.id} key={item.name}>{item.name}</Option>)
         })
         return options
+    },
+
+    updateSelectedItem(selectedRowKeys, selectedRows, selectedIds) {
+        if (selectedIds) {
+            this.setState({
+                selectedRowKeys,
+                selectedIds: selectedIds,
+                selectedItem: selectedRows
+            })
+        } else {
+            this.setState({
+                selectedRowKeys,
+                selectedItem: selectedRows
+            })
+        }
     }
 
 }

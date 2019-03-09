@@ -31,7 +31,9 @@ import HighTable from "./pages/table/highTable";
 import FilterForm from './pages/city';
 /*订单管理*/
 import Order from './pages/order';
-import OrderDetail from './pages/order/detail'
+import OrderDetail from './pages/order/detail';
+/*权限管理*/
+import Permission from './pages/permission';
 
 class Router extends Component {
 
@@ -58,6 +60,7 @@ class Router extends Component {
                                 <Route path='/admin/table/high' component={HighTable}></Route>
                                 <Route path='/admin/city' component={FilterForm}></Route>
                                 <Route path='/admin/order' component={Order}></Route>
+                                <Route path='/admin/permission' component={Permission}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>
