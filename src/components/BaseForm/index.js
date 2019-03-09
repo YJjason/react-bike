@@ -14,7 +14,11 @@ const Option = Select.Option;
 class FilterForm extends Component {
     handleFilterSubmit = () => {
         let fieldsValue = this.props.form.getFieldsValue();
+        console.log(1,fieldsValue)
         this.props.filterSubmit(fieldsValue)
+    }
+    reset = () => {
+        this.props.form.resetFields();
     }
     /*初始化*/
     initFormList = () => {
@@ -24,7 +28,7 @@ class FilterForm extends Component {
         if (formList && formList.length > 0) {
             formList.forEach((item, index) => {
                 let label = item.label;
-                let field = index;
+                let field = item.filter;
                 let initialValue = item.initialValue;
                 let placeholder = item.placeholder;
                 let width = item.width;
@@ -34,25 +38,23 @@ class FilterForm extends Component {
                             getFieldDecorator("begin_time", {
                                 initialValue: initialValue
                             })(
-                                <DatePicker showTime={true} placeholder={placeholder} fromat="YYYY-MM-DD HH-mm-ss"/>
+                                <DatePicker showTime={true} placeholder="选择开始时间" fromat="YYYY-MM-DD HH-mm-ss"/>
                             )
                         }
                     </FormItem>
                     formListItem.push(begin_time)
-                    const end_time = <FormItem label={label} key={field}>
+                    const end_time = <FormItem label="~" colon={false} key={field}>
                         {
-                            getFieldDecorator("end_time", {
-                            })(
-                                <DatePicker showTime={true} placeholder={placeholder} fromat="YYYY-MM-DD HH-mm-ss"/>
+                            getFieldDecorator("end_time", {})(
+                                <DatePicker showTime={true} placeholder="选择结束时间" fromat="YYYY-MM-DD HH-mm-ss"/>
                             )
                         }
                     </FormItem>
                     formListItem.push(end_time)
                 } else if (item.type === 'INPUT') {
-                    const INPUT = <FormItem label="~" colon={false} key={field}>
+                    const INPUT = <FormItem label={label} colon={false} key={field}>
                         {
-                            getFieldDecorator([field], {
-                            })(
+                            getFieldDecorator([field], {})(
                                 <Input type="text" placeholder={placeholder}/>
                             )
                         }

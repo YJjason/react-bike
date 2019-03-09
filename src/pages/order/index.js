@@ -30,7 +30,7 @@ class Order extends Component {
             placeholder: '全部',
             initialValue: '1',
             width: 100,
-            filter:'city_id',
+            filter: 'city_id',
             list: [
                 {
                     id: '0',
@@ -51,7 +51,7 @@ class Order extends Component {
             ]
         },
         {
-            type:'TIME_SEARCH',
+            type: 'TIME_SEARCH',
 
         },
         {
@@ -59,7 +59,7 @@ class Order extends Component {
             label: '订单状态',
             placeholder: '全部',
             initialValue: '1',
-            filter:'order_status',
+            filter: 'order_status',
             width: 100,
             list: [
                 {
@@ -84,12 +84,12 @@ class Order extends Component {
 
     requestList = () => {
         let _this = this;
-        axios.ajax({
+        axios.requestList(this,'/order/list',this.params)
+        // 使用封装的列表请求
+     /*   axios.ajax({
             url: '/order/list',
             data: {
-                params: {
-                    page: this.params.page
-                }
+                params: this.params
             }
         }).then((res) => {
             if (res.code === 0) {
@@ -104,7 +104,7 @@ class Order extends Component {
                     })
                 })
             }
-        })
+        })*/
     }
     openOrderDetail = () => {
         let item = this.state.selectedItem;
@@ -119,7 +119,6 @@ class Order extends Component {
     }
     onRowClick = (record, index) => {
         let selectKey = [index];
-        console.log(1, record)
         this.setState({
             selectedRowKeys: selectKey,
             selectedItem: record
@@ -132,8 +131,9 @@ class Order extends Component {
             selectedItem: record
         })
     }
-    handleFilter=(params)=>{
-        this.params=params;
+    handleFilter = (params) => {
+        console.log(params)
+        this.params = params;
         this.requestList(params)
     }
 
@@ -191,7 +191,7 @@ class Order extends Component {
             <div>
                 <Card title="城市管理">
                     {/*<FilterForm ></FilterForm>*/}
-                    <BaseForm formList ={this.formList} filterSubmit={this.handleFilter}/>
+                    <BaseForm formList={this.formList} filterSubmit={this.handleFilter}/>
                 </Card>
                 <Card style={{marginTop: 10}}>
                     <Button onClick={this.openOrderDetail}>订单详情</Button>

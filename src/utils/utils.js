@@ -35,7 +35,6 @@ export default {
 
 //
     getOptionList(data) {
-        console.log(111,data)
         if (!data) {
             return []
         }

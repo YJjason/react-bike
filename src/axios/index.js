@@ -7,6 +7,7 @@ import JsonP from 'jsonp';
 
 import axios from 'axios';
 import {Modal} from "antd";
+import Utils from "./../utils/utils";
 
 export default class Axios {
     static jsonp(options) {
@@ -37,8 +38,11 @@ export default class Axios {
                 baseURL: baseApi,
                 timeout: 5000,
                 params: (options.data && options.data.params) || ''
-
             }).then((response) => {
+                if (options.data && options.data.isShowLoading !== false) {
+                    loading = document.getElementById('ajaxLoading');
+                    loading.style.display = 'none';
+                }
                 if (response.status === 200) {
                     let res = response.data;
                     if (res.code == 0) {
@@ -54,6 +58,29 @@ export default class Axios {
                     reject(response.data)
                 }
             })
+        })
+    }
+    /*查询*/
+    static requestList(_this,url,params){
+        var data ={
+            params:params
+        }
+        this.ajax({
+            url:url,
+            data
+        }).then((data)=>{
+            if (data&& data.result) {
+                _this.setState({
+                    list: data.result.item_list.map((item, index) => {
+                        item.key = index;
+                        return item
+                    }),
+                    pagination: Utils.pagination(data, (current) => {
+                        _this.params.page = current;
+                        _this.requestList()
+                    })
+                })
+            }
         })
     }
 
