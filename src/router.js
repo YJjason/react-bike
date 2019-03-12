@@ -37,6 +37,8 @@ import Permission from './pages/permission';
 
 /*员工管理*/
 import User from './pages/user';
+/*车辆地图*/
+import BickMap from './pages/map';
 
 class Router extends Component {
 
@@ -65,6 +67,7 @@ class Router extends Component {
                                 <Route path='/admin/order' component={Order}></Route>
                                 <Route path='/admin/permission' component={Permission}></Route>
                                 <Route path='/admin/user' component={User}></Route>
+                                <Route path='/admin/bikeMap' component={BickMap}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>

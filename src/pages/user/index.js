@@ -131,12 +131,6 @@ class User extends Component {
                     })
                 }
             })
-            this.setState({
-                type,
-                isVisible: true,
-                title: '删除员工',
-                userInfo: item
-            })
         }
     }
     //创建员工提交按钮
