@@ -35,11 +35,14 @@ import OrderDetail from './pages/order/detail';
 /*权限管理*/
 import Permission from './pages/permission';
 
+/*员工管理*/
+import User from './pages/user';
+
 class Router extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <App>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/admin' render={() =>
@@ -61,6 +64,7 @@ class Router extends Component {
                                 <Route path='/admin/city' component={FilterForm}></Route>
                                 <Route path='/admin/order' component={Order}></Route>
                                 <Route path='/admin/permission' component={Permission}></Route>
+                                <Route path='/admin/user' component={User}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>
@@ -72,7 +76,7 @@ class Router extends Component {
                     }/>
 
                 </App>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 
