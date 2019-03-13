@@ -40,6 +40,10 @@ import User from './pages/user';
 /*车辆地图*/
 import BickMap from './pages/map';
 
+/*柱形图*/
+import Bar from './pages/echarts/bar';
+/*饼图*/
+import Pie from './pages/echarts/pie';
 class Router extends Component {
 
     render() {
@@ -68,6 +72,8 @@ class Router extends Component {
                                 <Route path='/admin/permission' component={Permission}></Route>
                                 <Route path='/admin/user' component={User}></Route>
                                 <Route path='/admin/bikeMap' component={BickMap}></Route>
+                                <Route path='/admin/charts/bar' component={Bar}></Route>
+                                <Route path='/admin/charts/pie' component={Pie}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>
