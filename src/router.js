@@ -46,6 +46,9 @@ import Bar from './pages/echarts/bar';
 import Pie from './pages/echarts/pie';
 /*折线图*/
 import Line from './pages/echarts/line';
+/*富文本*/
+import Rich from './pages/rich';
+
 class Router extends Component {
 
     render() {
@@ -77,6 +80,7 @@ class Router extends Component {
                                 <Route path='/admin/charts/bar' component={Bar}></Route>
                                 <Route path='/admin/charts/pie' component={Pie}></Route>
                                 <Route path='/admin/charts/line' component={Line}></Route>
+                                <Route path='/admin/rich' component={Rich}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>
