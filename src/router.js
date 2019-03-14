@@ -44,6 +44,8 @@ import BickMap from './pages/map';
 import Bar from './pages/echarts/bar';
 /*饼图*/
 import Pie from './pages/echarts/pie';
+/*折线图*/
+import Line from './pages/echarts/line';
 class Router extends Component {
 
     render() {
@@ -74,6 +76,7 @@ class Router extends Component {
                                 <Route path='/admin/bikeMap' component={BickMap}></Route>
                                 <Route path='/admin/charts/bar' component={Bar}></Route>
                                 <Route path='/admin/charts/pie' component={Pie}></Route>
+                                <Route path='/admin/charts/line' component={Line}></Route>
                                 <Route component={Nomatch}></Route>
                             </Switch>
                         </Admin>
