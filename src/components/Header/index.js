@@ -10,6 +10,8 @@ import './index.less';
 import Util from '../../utils/utils';
 import axios from '../../axios';
 
+import {connect} from "react-redux";
+
 class Header extends Component {
 
     constructor(props) {
@@ -71,7 +73,7 @@ class Header extends Component {
                 {
                     menuType ? '' : <Row className='breadcrumb'>
                         <Col span={4} className='breadcrumb-title'>
-                            首页
+                           {this.props.menuName}
                         </Col>
                         <Col span={20} className='weather'>
                             <span className='date'>{this.state.sysTime}</span>
@@ -91,4 +93,9 @@ class Header extends Component {
 
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        menuName: state.menuName
+    }
+}
+export default connect(mapStateToProps,null)(Header);

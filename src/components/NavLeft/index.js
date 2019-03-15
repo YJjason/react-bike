@@ -10,6 +10,9 @@ import MenuConfig from "../../config/menuConfig";
 import {NavLink} from "react-router-dom";
 import './index.less';
 
+import {connect} from 'react-redux';
+import {switchMenu, SwitchMenu} from './../../redux/action'
+
 const SubMenu = Menu.SubMenu;
 
 // const MenuItemGroup = Menu.ItemGroup;
@@ -46,10 +49,13 @@ class NavLeft extends Component {
             </Menu.Item>
         })
     }
-    handleClick = (item) => {
-        console.log(item)
+    handleClick = ({item,key}) => {
+        //派发事件
+        const {dispatch} = this.props;
+        console.log(1122,item.props)
+        dispatch(switchMenu(item.props.title))
         this.setState({
-            currentKey:item.key
+            currentKey:key
         })
     }
 
@@ -79,4 +85,4 @@ class NavLeft extends Component {
 
 }
 
-export default NavLeft;
+export default connect(null,null)(NavLeft);
