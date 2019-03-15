@@ -16,9 +16,17 @@ const SubMenu = Menu.SubMenu;
 
 
 class NavLeft extends Component {
+    state = {
+        currentKey: ''
+    }
+
     componentWillMount() {
         const menuTreeNode = this.renderMenu(MenuConfig);
-        this.setState({menuTreeNode});
+        let currentKey = window.location.pathname
+        this.setState({
+            menuTreeNode,
+            currentKey
+        });
     }
 
     /*渲染左侧菜单列表 递归*/
@@ -38,6 +46,12 @@ class NavLeft extends Component {
             </Menu.Item>
         })
     }
+    handleClick = (item) => {
+        console.log(item)
+        this.setState({
+            currentKey:item.key
+        })
+    }
 
     render() {
         return (
@@ -46,7 +60,10 @@ class NavLeft extends Component {
                     <img src="/assets/logo-ant.svg" alt=""/>
                     <h1>Imooc MS</h1>
                 </div>
-                <Menu theme='dark'>
+                <Menu theme='dark'
+                      selectedKeys={this.state.currentKey}
+                      onClick={this.handleClick}
+                >
                     {/*<SubMenu key="sub1" title={<span><Icon type="mail"/>
                     <span>Navigation One</span></span>}>
                         <Menu.Item key="1">Option 1</Menu.Item>

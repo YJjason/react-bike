@@ -5,5 +5,12 @@ import ReactDOM from 'react-dom';
 // import Router from './pages/route-demo/route2/router';
 import Router from './router';
 
+import {Provider} from "react-redux"; // 添加<Provider />项目根组件
+import configureStore from "./redux/store/index";
 
-ReactDOM.render(<Router />, document.getElementById('root'));
+const store = configureStore();
+ReactDOM.render(
+    <Provider store={store}>
+        <Router/>
+    </Provider>
+    , document.getElementById('root'));

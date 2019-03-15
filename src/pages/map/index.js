@@ -140,7 +140,7 @@ export default class BikeMap extends Component {
                 </Card>
                 <Card style={{marginTop: 10}}>
                     <div>共{this.state.total_count}辆</div>
-                    <div id="container" style={{height: 800}}></div>
+                    <div id="container" style={{height: 500}}></div>
                 </Card>
             </div>
         );
