@@ -9,7 +9,6 @@ import {Card, Table, Modal, Button, message, Badge} from 'antd';
 // import axios from 'axios';
 //使用封装的请求
 import axios from './../../../axios'
-import Utils from './../../../utils/utils.js'
 
 class HighTable extends Component {
     state = {
@@ -33,7 +32,7 @@ class HighTable extends Component {
                 }
             }
         }).then((res) => {
-            if (res.code == 0) {
+            if (res.code === 0) {
                 res.result.list.map((item, index) => {
                     item.key = index
                 })

@@ -11,7 +11,7 @@ import {NavLink} from "react-router-dom";
 import './index.less';
 
 import {connect} from 'react-redux';
-import {switchMenu, SwitchMenu} from './../../redux/action'
+import {switchMenu} from './../../redux/action'
 
 const SubMenu = Menu.SubMenu;
 

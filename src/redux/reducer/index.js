@@ -17,7 +17,11 @@ export default (state = initialState, action) => {
                 ...state, // 旧值
                 menuName: action.menuName // 新值
             }
-
+        case type.SWITCH_USERS:
+            return {
+                ...state,
+                userName: action.userName
+            }
         default:
             return {
                 ...state

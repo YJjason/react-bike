@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 import React, {Component} from 'react';
-import {Row, Col} from 'antd';
+import {Row, Col, Modal} from 'antd';
 import './index.less';
 
 import Util from '../../utils/utils';
@@ -25,7 +25,7 @@ class Header extends Component {
 
     componentWillMount() {
         this.setState({
-            userName: 'jason'
+            userName: 'admin'
         });
         this.timer = setInterval(() => {
             let sysTime = Util.formateDate(new Date().getTime());
@@ -53,6 +53,19 @@ class Header extends Component {
         })
     }
 
+    handleExit = () => {
+        Modal.confirm({
+            title: '是否确认要退出系统?',
+            onOk() {
+                window.location.href = '/login'
+            },
+            onCancel() {
+                console.log(11)
+            }
+        })
+
+    }
+
     render() {
         const menuType = this.props.menuType;
         return (
@@ -66,14 +79,14 @@ class Header extends Component {
                             </Col> : ''
                     }
                     <Col span={menuType ? 20 : 24}>
-                        <span>欢迎，{this.state.userName}</span>
-                        <a href="javascript:void (0)">退出</a>
+                        <span>欢迎，{this.props.userName|| this.state.userName }</span>
+                        <a href="javascript:void (0)" onClick={this.handleExit}>退出</a>
                     </Col>
                 </Row>
                 {
                     menuType ? '' : <Row className='breadcrumb'>
                         <Col span={4} className='breadcrumb-title'>
-                           {this.props.menuName}
+                            {this.props.menuName}
                         </Col>
                         <Col span={20} className='weather'>
                             <span className='date'>{this.state.sysTime}</span>
@@ -94,8 +107,10 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(1231,state)
     return {
-        menuName: state.menuName
+        menuName: state.menuName,
+        userName: state.userName
     }
 }
-export default connect(mapStateToProps,null)(Header);
+export default connect(mapStateToProps, null)(Header);

@@ -138,12 +138,12 @@ class User extends Component {
         let type = this.state.type;
         let data = this.userForm.props.form.getFieldsValue();
         axios.ajax({
-            url: type == 'create' ? '/user/add' : '/user/edit',
+            url: type === 'create' ? '/user/add' : '/user/edit',
             data: {
                 params: data
             }
         }).then((res) => {
-            if (res.code == 0) {
+            if (res.code === 0) {
                 this.setState({
                     isVisible: false
                 })
@@ -166,7 +166,7 @@ class User extends Component {
                 title: '性别',
                 dataIndex: 'sex',
                 render(sex) {
-                    return sex == 1 ? '男' : '女';
+                    return sex === 1 ? '男' : '女';
                 }
             }, {
                 title: '状态',
@@ -316,7 +316,7 @@ class UserForm extends Component {
                     </FormItem>
                     <FormItem label="性别" {...formItemLayout}>
                         {
-                            type === 'detail' ? userInfo.sex == 1 ? "男" : "女" :
+                            type === 'detail' ? userInfo.sex === 1 ? "男" : "女" :
                                 getFieldDecorator('sex', {
                                     initialValue: userInfo.sex
                                 })(
