@@ -16,9 +16,9 @@ export function switchMenu(menuName) {
         menuName
     }
 }
-export function switchUsers(username) {
+export function switchUsers(userName) {
     return{
         type:type.SWITCH_USERS,
-        username
+        userName
     }
 }
