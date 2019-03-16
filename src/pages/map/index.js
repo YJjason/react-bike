@@ -1,15 +1,12 @@
-/**+----------------------------------------------------------------------
- * | index
- *+----------------------------------------------------------------------
- * | Author: 1009239228@qq.com +----------------------------------------------------------------------
+/**
+ * +----------------------------------------------------------------------
+ * | map| Author: 1009239228@qq.com
+ * +----------------------------------------------------------------------
  */
 import React, {Component} from 'react';
 
-import {Card, Form, Button, Modal, Input, Radio, DatePicker, Select} from "antd";
-import moment from 'moment';
+import {Card} from "antd";
 import axios from './../../axios';
-import Utils from './../../utils/utils';
-import ETable from './../../components/ETable';
 import BaseForm from './../../components/BaseForm'
 
 
@@ -38,10 +35,12 @@ export default class BikeMap extends Component {
         this.requestList();
     }
 
+    //查询表单
     handleFilterSubmit = (FilterParams) => {
         this.params = FilterParams;
         this.requestList()
     }
+    //查询列表数据
     requestList = () => {
         axios.ajax({
             url: '/map/bike_list',
@@ -49,7 +48,6 @@ export default class BikeMap extends Component {
                 params: this.params
             }
         }).then((res) => {
-            console.log(1221, res)
             if (res.code == 0) {
                 this.setState({
                     total_count: res.result.total_count
@@ -68,6 +66,7 @@ export default class BikeMap extends Component {
         let startPoint = new window.BMap.Point(gps1[0], gps1[1]) // 开始经纬度
         let endPoint = new window.BMap.Point(gps2[0], gps2[1]) //终点经纬度
         this.map.centerAndZoom(endPoint, 11)
+        //起点 图标Icon 、覆盖物/Marker、添加addOverlay
         let startPointIcon = new window.BMap.Icon(
             '/assets/start_point.png',
             new window.BMap.Size(36, 42), {
@@ -75,7 +74,7 @@ export default class BikeMap extends Component {
                 anchor: new window.BMap.Size(18, 42)
             })
         //覆盖物
-        let bikeMarkerStart = new window.BMap.Marker(startPoint, {Icon: startPointIcon})
+        let bikeMarkerStart = new window.BMap.Marker(startPoint, {icon: startPointIcon})
         this.map.addOverlay(bikeMarkerStart)
         let endPointIcon = new window.BMap.Icon(
             '/assets/end_point.png',
@@ -85,15 +84,17 @@ export default class BikeMap extends Component {
                 anchor: new window.BMap.Size(18, 42),
             }
         )
-        let bikeMarkerEnd = new window.BMap.Marker(startPoint, {Icon: endPointIcon})
+        let bikeMarkerEnd = new window.BMap.Marker(startPoint, {icon: endPointIcon})
         this.map.addOverlay(bikeMarkerEnd);
+        bikeMarkerEnd.addEventListener('click', function (e) {
+            alert('当前位置：' + e.point.lng + "," + e.point.lat)
+        })
         //绘制行程路线
         let routeList = [];
         list.forEach((item) => {
             let p = item.split(',');
             //添加坐标点
             routeList.push(new window.BMap.Point(p[0], p[1]));
-
         })
         let polyLine = new window.BMap.Polyline(routeList, {
             strokeColor: '#ef4136',
@@ -106,7 +107,7 @@ export default class BikeMap extends Component {
         let servicePointList = [];
         let serviceList = res.result.service_list;
         serviceList.forEach((item) => {
-            servicePointList.push(new window.BMap.Point(item.lng, item.lat))
+            servicePointList.push(new window.BMap.Point(item.lon, item.lat))
         })
         let polySeviceLine = new window.BMap.Polyline(servicePointList, {
             strokeColor: '#ef4136',
@@ -124,10 +125,10 @@ export default class BikeMap extends Component {
                 anchor: new window.BMap.Size(18, 42),
             })
 
-        bikeList.forEach((item)=>{
-            let p= item.split(',');
-            let point =new window.BMap.Point(p[0],p[1]);
-            let bikeMarke = new window.BMap.Marker(point,{icon:bikeIcon})
+        bikeList.forEach((item) => {
+            let p = item.split(',');
+            let point = new window.BMap.Point(p[0], p[1]);
+            let bikeMarke = new window.BMap.Marker(point, {icon: bikeIcon})
             this.map.addOverlay(bikeMarke);
         })
     }
