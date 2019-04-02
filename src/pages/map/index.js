@@ -37,6 +37,7 @@ export default class BikeMap extends Component {
 
     //查询表单
     handleFilterSubmit = (FilterParams) => {
+        console.log('13123add',FilterParams)
         this.params = FilterParams;
         this.requestList()
     }
