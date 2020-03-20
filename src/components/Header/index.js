@@ -41,7 +41,7 @@ class Header extends Component {
     getWeatherAPIData() {
         let city = '苏州'
         axios.jsonp({
-            url: 'http://api.map.baidu.com/telematics/v3/weather?location=' + encodeURIComponent(city) + '&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'
+            url: 'http://api.map.baidu.com/telematics/v3/weather?location=' + encodeURIComponent(city) + '&output=json&ak=9V2s9fGPqXjHlImsKB21FQTEC6n0Wio5'
         }).then((res) => {
             if (res.status === 'success') {
                 let data = res.results[0].weather_data[0];
